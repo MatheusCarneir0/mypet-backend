@@ -33,12 +33,15 @@ class Cliente(BaseModel):
         ]
     )
     endereco = models.CharField(_('Endereço'), max_length=255)
+<<<<<<< HEAD
     ponto_referencia = models.CharField(
         _('Ponto de Referência'),
         max_length=255,
         blank=True,
         default=''
     )
+=======
+>>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
     cidade = models.CharField(_('Cidade'), max_length=100)
     estado = models.CharField(
         _('Estado'),

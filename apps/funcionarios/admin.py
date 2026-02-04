@@ -1,6 +1,10 @@
 # apps/funcionarios/admin.py
 from django.contrib import admin
+<<<<<<< HEAD
 from .models import Funcionario, HorarioTrabalho
+=======
+from .models import Funcionario
+>>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
 
 
 @admin.register(Funcionario)
@@ -10,6 +14,7 @@ class FuncionarioAdmin(admin.ModelAdmin):
     search_fields = ['usuario__nome', 'usuario__email']
     readonly_fields = ['data_criacao', 'data_atualizacao']
 
+<<<<<<< HEAD
 
 @admin.register(HorarioTrabalho)
 class HorarioTrabalhoAdmin(admin.ModelAdmin):
@@ -18,3 +23,5 @@ class HorarioTrabalhoAdmin(admin.ModelAdmin):
     search_fields = ['funcionario__usuario__nome']
 
 
+=======
+>>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)

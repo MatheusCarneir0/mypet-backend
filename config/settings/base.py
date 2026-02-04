@@ -1,16 +1,55 @@
+<<<<<<< HEAD
     
     # Third-party apps
+=======
+# config/settings/base.py
+"""
+Django settings for MyPet project.
+Base settings shared across all environments.
+"""
+import os
+from pathlib import Path
+from decouple import config
+from datetime import timedelta
+
+# Build paths
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
+
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = config('SECRET_KEY', default='django-insecure-change-me-in-production')
+
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = config('DEBUG', default=False, cast=bool)
+
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost,127.0.0.1').split(',')
+
+# Application definition
+DJANGO_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+]
+
+THIRD_PARTY_APPS = [
+>>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
     'rest_framework',
     'rest_framework_simplejwt',
     'corsheaders',
-    'drf_spectacular',
     'django_filters',
-    
-    # Local apps - ORDEM IMPORTA!
-    'apps.users',  # PRIMEIRO (dependência dos outros)
-    'apps.clients',
-    'apps.employees',
+    'drf_spectacular',
+    'django_celery_beat',
+]
+
+LOCAL_APPS = [
+    'apps.core',
+    'apps.authentication',
+    'apps.me',
+    'apps.clientes',
     'apps.pets',
+<<<<<<< HEAD
     'apps.services',
     'apps.appointments',
     'apps.payments',
@@ -36,6 +75,8 @@ LOCAL_APPS = [
     'apps.me',
     'apps.clientes',
     'apps.pets',
+=======
+>>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
     'apps.agendamentos',
     'apps.servicos',
     'apps.funcionarios',
@@ -49,7 +90,10 @@ INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+<<<<<<< HEAD
     'whitenoise.middleware.WhiteNoiseMiddleware',
+=======
+>>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
     'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -119,11 +163,18 @@ TIME_ZONE = 'America/Fortaleza'
 USE_I18N = True
 USE_TZ = True
 
+<<<<<<< HEAD
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+=======
+# Static files (CSS, JavaScript, Images)
+STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATICFILES_DIRS = [BASE_DIR / 'static']
+>>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
 
 # Media files
 MEDIA_URL = '/media/'
@@ -149,6 +200,7 @@ REST_FRAMEWORK = {
     ],
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
     'EXCEPTION_HANDLER': 'apps.core.exceptions.custom_exception_handler',
+<<<<<<< HEAD
     # Rate Limiting — proteção contra brute-force e DoS
     'DEFAULT_THROTTLE_CLASSES': [
         'rest_framework.throttling.AnonRateThrottle',
@@ -160,6 +212,8 @@ REST_FRAMEWORK = {
         'login': config('THROTTLE_LOGIN_RATE', default='5/minute'),
         'register': config('THROTTLE_REGISTER_RATE', default='10/hour'),
     }
+=======
+>>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
 }
 
 # JWT Settings
@@ -180,6 +234,7 @@ SIMPLE_JWT = {
 }
 
 # CORS Settings
+<<<<<<< HEAD
 _cors_env = config('CORS_ORIGINS', default='')
 if _cors_env:
     CORS_ALLOWED_ORIGINS = [o.strip() for o in _cors_env.split(',') if o.strip()]
@@ -193,6 +248,13 @@ else:
         "http://127.0.0.1:5173",
     ]
     CORS_ALLOW_ALL_ORIGINS = False
+=======
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    "http://localhost:3001",
+    "http://127.0.0.1:3000",
+]
+>>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
 CORS_ALLOW_CREDENTIALS = True
 
 # Cache (Redis)
@@ -229,7 +291,11 @@ DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL', default='noreply@farmavet.com.
 
 # PIX Configuration
 PIX_CHAVE = config('PIX_CHAVE', default='suachave@email.com')
+<<<<<<< HEAD
 PIX_MERCHANT_NAME = config('PIX_MERCHANT_NAME', default='FarmaVet')
+=======
+PIX_MERCHANT_NAME = config('PIX_MERCHANT_NAME', default='FarmaVet Pet Shop')
+>>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
 PIX_MERCHANT_CITY = config('PIX_MERCHANT_CITY', default='Boa Viagem')
 
 # Backup Configuration
@@ -248,6 +314,7 @@ LOGGING = {
             'format': '{levelname} {asctime} {module} {message}',
             'style': '{',
         },
+<<<<<<< HEAD
         'auditoria': {
             'format': '[AUDITORIA] {asctime} | {message}',
             'style': '{',
@@ -259,11 +326,16 @@ LOGGING = {
             'class': 'logging.StreamHandler',
             'formatter': 'verbose',
         },
+=======
+    },
+    'handlers': {
+>>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
         'file': {
             'level': 'INFO',
             'class': 'logging.FileHandler',
             'filename': BASE_DIR / 'logs' / 'django.log',
             'formatter': 'verbose',
+<<<<<<< HEAD
             'delay': True,
         },
         # Handler exclusivo de auditoria (compliance / LGPD)
@@ -277,6 +349,17 @@ LOGGING = {
     },
     'root': {
         'handlers': ['console'],
+=======
+        },
+        'console': {
+            'level': 'INFO',
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose',
+        },
+    },
+    'root': {
+        'handlers': ['console', 'file'],
+>>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
         'level': 'INFO',
     },
     'loggers': {
@@ -285,6 +368,7 @@ LOGGING = {
             'level': 'INFO',
             'propagate': False,
         },
+<<<<<<< HEAD
         'django.db.backends': {
             'handlers': ['console'],
             'level': 'ERROR',
@@ -319,3 +403,16 @@ SPECTACULAR_SETTINGS = {
 }
 
 >>>>>>> f9a2bae6002ef127bbe409eb0d6089f2507abfff
+=======
+    },
+}
+
+# Spectacular Settings (API Docs)
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'MyPet API',
+    'DESCRIPTION': 'Sistema de Gerenciamento para Pet Shop FarmaVet',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+}
+
+>>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)

@@ -17,8 +17,11 @@ class Servico(BaseModel):
         BANHO = 'BANHO', _('Banho')
         TOSA = 'TOSA', _('Tosa')
         BANHO_TOSA = 'BANHO_TOSA', _('Banho e Tosa')
+<<<<<<< HEAD
         CORTE_UNHAS = 'CORTE_UNHAS', _('Corte de Unhas')
         BANHO_TERAPEUTICO = 'BANHO_TERAPEUTICO', _('Banho Terapêutico')
+=======
+>>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
         VETERINARIO = 'VETERINARIO', _('Atendimento Veterinário')
         VACINA = 'VACINA', _('Vacinação')
         CONSULTA = 'CONSULTA', _('Consulta')
@@ -27,7 +30,12 @@ class Servico(BaseModel):
     tipo = models.CharField(
         _('Tipo de Serviço'),
         max_length=20,
+<<<<<<< HEAD
         choices=TipoServico.choices
+=======
+        choices=TipoServico.choices,
+        unique=True
+>>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
     )
     descricao = models.TextField(_('Descrição'))
     preco = models.DecimalField(
@@ -38,6 +46,7 @@ class Servico(BaseModel):
     )
     duracao_minutos = models.PositiveIntegerField(
         _('Duração em Minutos'),
+<<<<<<< HEAD
         help_text='Duração padrão do serviço (porte pequeno)'
     )
     duracao_medio_grande = models.PositiveIntegerField(
@@ -45,6 +54,9 @@ class Servico(BaseModel):
         null=True,
         blank=True,
         help_text='Duração para porte médio/grande. Se vazio, usa a padrão.'
+=======
+        help_text='Duração estimada do serviço'
+>>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
     )
     
     class Meta:

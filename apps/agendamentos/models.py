@@ -7,8 +7,11 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django.core.exceptions import ValidationError
 from django.utils import timezone
+<<<<<<< HEAD
 from datetime import timedelta
 
+=======
+>>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
 from apps.clientes.models import Cliente
 from apps.pets.models import Pet
 from apps.servicos.models import Servico
@@ -28,11 +31,14 @@ class Agendamento(BaseModel):
         CONCLUIDO = 'CONCLUIDO', _('Concluído')
         CANCELADO = 'CANCELADO', _('Cancelado')
         NAO_COMPARECEU = 'NAO_COMPARECEU', _('Não Compareceu')
+<<<<<<< HEAD
 
     class StatusPagamento(models.TextChoices):
         PENDENTE = 'PENDENTE', _('Pendente')
         PAGO = 'PAGO', _('Pago')
         FALHOU = 'FALHOU', _('Falhou')
+=======
+>>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
     
     cliente = models.ForeignKey(
         Cliente,
@@ -77,6 +83,7 @@ class Agendamento(BaseModel):
         choices=Status.choices,
         default=Status.AGENDADO
     )
+<<<<<<< HEAD
     duracao_real = models.PositiveIntegerField(
         _('Duração Real (min)'),
         null=True,
@@ -96,6 +103,8 @@ class Agendamento(BaseModel):
         null=True,
         blank=True
     )
+=======
+>>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
     observacoes = models.TextField(
         _('Observações'),
         blank=True,
@@ -128,6 +137,7 @@ class Agendamento(BaseModel):
         """
         Validações customizadas do modelo.
         """
+<<<<<<< HEAD
         from apps.agendamentos.validators import AgendamentoValidator
         
         valido_pet, err_pet = AgendamentoValidator.validar_pet_pertence_cliente(self.pet, self.cliente)
@@ -138,6 +148,19 @@ class Agendamento(BaseModel):
         # agora residem na camada de Services via Validators para manter as regras de négocio em um só lugar
         # e evitar loops infinitos ao salvar em lotes e conflitos isolados.
         pass
+=======
+        # Validar que o pet pertence ao cliente
+        if self.pet and self.cliente and self.pet.cliente != self.cliente:
+            raise ValidationError({
+                'pet': _('O pet selecionado não pertence a este cliente.')
+            })
+        
+        # Validar que a data/hora é futura
+        if self.data_hora and self.data_hora < timezone.now():
+            raise ValidationError({
+                'data_hora': _('Não é possível agendar para uma data/hora no passado.')
+            })
+>>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
         
         super().clean()
     
@@ -158,6 +181,7 @@ class Agendamento(BaseModel):
     @property
     def pode_concluir(self):
         """Verifica se o agendamento pode ser concluído."""
+<<<<<<< HEAD
         return self.status in [self.Status.EM_ANDAMENTO, self.Status.AGENDADO, self.Status.CONFIRMADO]
         
     @property
@@ -167,4 +191,7 @@ class Agendamento(BaseModel):
             duracao = self.duracao_real or self.servico.duracao_minutos
             return self.data_hora + timedelta(minutes=duracao)
         return self.data_hora
+=======
+        return self.status == self.Status.EM_ANDAMENTO
+>>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
 

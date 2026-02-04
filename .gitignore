@@ -44,7 +44,10 @@ venv.bak/
 *.swp
 *.swo
 *~
+
+# OS
 .DS_Store
+<<<<<<< HEAD
 
 # Testing
 .coverage
@@ -64,12 +67,18 @@ celerybeat.pid
 .DS_Store
 Thumbs.db
 >>>>>>> f9a2bae6002ef127bbe409eb0d6089f2507abfff
+=======
+Thumbs.db
+>>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
 
 # Docker
 .dockerignore
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
 # Logs
 logs/
 *.log
@@ -94,4 +103,7 @@ coverage.xml
 .dmypy.json
 dmypy.json
 
+<<<<<<< HEAD
 >>>>>>> f9a2bae6002ef127bbe409eb0d6089f2507abfff
+=======
+>>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)

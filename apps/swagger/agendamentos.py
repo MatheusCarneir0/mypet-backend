@@ -7,11 +7,16 @@ from apps.agendamentos.serializers import (
     AgendamentoListSerializer,
     AgendamentoCreateSerializer,
     AgendamentoUpdateSerializer,
+<<<<<<< HEAD
     AgendamentoUpdateSerializer,
     IniciarAgendamentoSerializer,
     ConcluirAgendamentoSerializer,
     CancelarAgendamentoSerializer,
     ReagendarAgendamentoSerializer
+=======
+    IniciarAgendamentoSerializer,
+    ConcluirAgendamentoSerializer
+>>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
 )
 
 TAG = "Agendamentos"
@@ -61,7 +66,16 @@ cancelar_agendamento = extend_schema(
     tags=[TAG],
     summary="Cancelar agendamento",
     description="Cancela um agendamento existente alterando status para CANCELADO (Frame 467). Clientes podem cancelar seus próprios agendamentos.",
+<<<<<<< HEAD
     request=CancelarAgendamentoSerializer,
+=======
+    request={
+        "type": "object",
+        "properties": {
+            "motivo": {"type": "string", "description": "Motivo do cancelamento"}
+        }
+    },
+>>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
     responses={
         200: envelop({"type": "object", "properties": {"message": {"type": "string"}}}),
         400: {"description": "Agendamento não pode ser cancelado"},
@@ -73,7 +87,17 @@ reagendar_agendamento = extend_schema(
     tags=[TAG],
     summary="Reagendar um agendamento",
     description="Reagenda um agendamento para uma nova data/hora.",
+<<<<<<< HEAD
     request=ReagendarAgendamentoSerializer,
+=======
+    request={
+        "type": "object",
+        "properties": {
+            "data_hora": {"type": "string", "format": "date-time", "description": "Nova data e hora do agendamento"}
+        },
+        "required": ["data_hora"]
+    },
+>>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
     responses={
         200: {"description": "Agendamento reagendado com sucesso"},
         400: {"description": "Data/hora inválida ou conflito de horário"},
@@ -122,7 +146,31 @@ horarios_disponiveis = extend_schema(
     }
 )
 
+<<<<<<< HEAD
 
+=======
+atualizar_status_agendamento = extend_schema(
+    tags=[TAG],
+    summary="Iniciar serviço",
+    description="Inicia o serviço alterando status para EM_ANDAMENTO (apenas funcionários).",
+    request={
+        "type": "object",
+        "properties": {
+            "status": {
+                "type": "string",
+                "enum": ["AGENDADO", "CONFIRMADO", "EM_ANDAMENTO", "CONCLUIDO", "CANCELADO", "NAO_COMPARECEU"],
+                "description": "Novo status do agendamento"
+            }
+        },
+        "required": ["status"]
+    },
+    responses={
+        200: envelop(AgendamentoDetailSerializer),
+        400: {"description": "Status inválido ou transição não permitida"},
+        404: {"description": "Agendamento não encontrado"}
+    }
+)
+>>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
 
 # Schema view para aplicar todos os decorators de uma vez
 agendamento_view_schema = extend_schema_view(
@@ -130,7 +178,16 @@ agendamento_view_schema = extend_schema_view(
     retrieve=retrieve_agendamento,
     create=create_agendamento,
     cancelar=cancelar_agendamento,
+<<<<<<< HEAD
     iniciar=iniciar_agendamento,
     concluir=concluir_agendamento,
     disponibilidade=horarios_disponiveis,
+=======
+    reagendar=reagendar_agendamento,
+    iniciar=iniciar_agendamento,
+    concluir=concluir_agendamento,
+    horarios_disponiveis=horarios_disponiveis,
+    disponibilidade=horarios_disponiveis,
+    status=atualizar_status_agendamento,
+>>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
 )

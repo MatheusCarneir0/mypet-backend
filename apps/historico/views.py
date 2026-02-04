@@ -19,10 +19,14 @@ class HistoricoAtendimentoViewSet(viewsets.ReadOnlyModelViewSet):
     """
     ViewSet para histórico de atendimentos (somente leitura).
     """
+<<<<<<< HEAD
     queryset = HistoricoAtendimento.objects.all().select_related(
         'pet', 'forma_pagamento', 'agendamento__cliente__usuario',
         'agendamento__funcionario__usuario'
     )
+=======
+    queryset = HistoricoAtendimento.objects.all().select_related('pet', 'forma_pagamento')
+>>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
     serializer_class = HistoricoAtendimentoSerializer
     permission_classes = [IsAuthenticated]
     filter_backends = [DjangoFilterBackend, OrderingFilter]
@@ -47,8 +51,13 @@ class HistoricoAtendimentoViewSet(viewsets.ReadOnlyModelViewSet):
                 return queryset.filter(pet__cliente__usuario=user)
             except:
                 return queryset.none()
+<<<<<<< HEAD
         elif user.is_funcionario:
             # Funcionário vê apenas históricos dos agendamentos em que é responsável
             return queryset.filter(agendamento__funcionario__usuario=user)
         # Administrador vê todos
+=======
+        
+        # Administrador e funcionário vêem todos
+>>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
         return queryset

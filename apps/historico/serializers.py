@@ -8,6 +8,7 @@ from .models import HistoricoAtendimento
 
 class HistoricoAtendimentoSerializer(serializers.ModelSerializer):
     """
+<<<<<<< HEAD
     Serializer de detalhe de Histórico de Atendimento.
     """
     nome_pet = serializers.CharField(source='pet.nome', read_only=True)
@@ -19,31 +20,46 @@ class HistoricoAtendimentoSerializer(serializers.ModelSerializer):
         source='forma_pagamento.nome',
         read_only=True,
         default=None
+=======
+    Serializer base de Histórico de Atendimento.
+    """
+    nome_pet = serializers.CharField(source='pet.nome', read_only=True)
+    forma_pagamento_display = serializers.CharField(
+        source='forma_pagamento.nome',
+        read_only=True
+>>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
     )
     
     class Meta:
         model = HistoricoAtendimento
         fields = [
             'id', 'agendamento', 'pet', 'nome_pet',
+<<<<<<< HEAD
             'nome_cliente', 'nome_funcionario', 'status',
+=======
+>>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
             'forma_pagamento', 'forma_pagamento_display',
             'data_atendimento', 'tipo_servico', 'observacoes',
             'valor_pago', 'data_criacao'
         ]
         read_only_fields = ['id', 'data_criacao']
 
+<<<<<<< HEAD
     def get_nome_funcionario(self, obj):
         func = getattr(obj.agendamento, 'funcionario', None)
         if func:
             return func.usuario.get_full_name()
         return None
 
+=======
+>>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
 
 class HistoricoAtendimentoListSerializer(serializers.ModelSerializer):
     """
     Serializer otimizado para listagem de histórico.
     """
     nome_pet = serializers.CharField(source='pet.nome', read_only=True)
+<<<<<<< HEAD
     nome_cliente = serializers.CharField(
         source='agendamento.cliente.usuario.get_full_name', read_only=True)
     nome_funcionario = serializers.SerializerMethodField()
@@ -62,3 +78,12 @@ class HistoricoAtendimentoListSerializer(serializers.ModelSerializer):
         if func:
             return func.usuario.get_full_name()
         return None
+=======
+    
+    class Meta:
+        model = HistoricoAtendimento
+        fields = [
+            'id', 'nome_pet', 'tipo_servico',
+            'data_atendimento', 'valor_pago'
+        ]
+>>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)

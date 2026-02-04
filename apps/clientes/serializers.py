@@ -4,7 +4,10 @@ Serializers para o app de clientes.
 """
 from rest_framework import serializers
 from django.db import transaction
+<<<<<<< HEAD
 from drf_spectacular.utils import extend_schema_field
+=======
+>>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
 from .models import Cliente
 from apps.authentication.models import Usuario
 from apps.authentication.serializers import UsuarioSerializer
@@ -21,7 +24,11 @@ class ClienteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Cliente
         fields = [
+<<<<<<< HEAD
             'id', 'usuario', 'cpf', 'endereco', 'ponto_referencia', 'cidade',
+=======
+            'id', 'usuario', 'cpf', 'endereco', 'cidade',
+>>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
             'estado', 'cep', 'total_pets', 'total_agendamentos',
             'ativo', 'data_criacao', 'data_atualizacao'
         ]
@@ -55,6 +62,7 @@ class ClienteCreateSerializer(serializers.ModelSerializer):
     nome = serializers.CharField(write_only=True)
     telefone = serializers.CharField(write_only=True)
     senha = serializers.CharField(write_only=True, style={'input_type': 'password'})
+<<<<<<< HEAD
     confirmar_senha = serializers.CharField(write_only=True, required=False, style={'input_type': 'password'})
     
     # Campos do cliente
@@ -64,12 +72,26 @@ class ClienteCreateSerializer(serializers.ModelSerializer):
     cidade = serializers.CharField(required=False, allow_blank=True, default='')
     estado = serializers.CharField(required=False, allow_blank=True, default='')
     cep = serializers.CharField(required=False, allow_blank=True, default='')
+=======
+    confirmar_senha = serializers.CharField(write_only=True, style={'input_type': 'password'})
+    
+    # Campos do cliente
+    cpf = serializers.CharField()
+    endereco = serializers.CharField()
+    cidade = serializers.CharField()
+    estado = serializers.CharField()
+    cep = serializers.CharField()
+>>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
     
     class Meta:
         model = Cliente
         fields = [
             'email', 'nome', 'telefone', 'senha', 'confirmar_senha',
+<<<<<<< HEAD
             'cpf', 'endereco', 'ponto_referencia', 'cidade', 'estado', 'cep'
+=======
+            'cpf', 'endereco', 'cidade', 'estado', 'cep'
+>>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
         ]
     
     def validate(self, attrs):
@@ -77,15 +99,25 @@ class ClienteCreateSerializer(serializers.ModelSerializer):
         Validação customizada.
         """
         # Validar senhas
+<<<<<<< HEAD
         confirmar_senha = attrs.pop('confirmar_senha', None)
         if confirmar_senha is not None and attrs['senha'] != confirmar_senha:
+=======
+        if attrs['senha'] != attrs.pop('confirmar_senha'):
+>>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
             raise serializers.ValidationError({
                 'confirmar_senha': 'As senhas não coincidem.'
             })
         
+<<<<<<< HEAD
         # Validar CPF único (apenas se informado)
         cpf = attrs.get('cpf', '')
         if cpf and Cliente.objects.filter(cpf=cpf, ativo=True).exists():
+=======
+        # Validar CPF único
+        cpf = attrs.get('cpf')
+        if Cliente.objects.filter(cpf=cpf, ativo=True).exists():
+>>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
             raise serializers.ValidationError({
                 'cpf': 'Já existe um cliente cadastrado com este CPF.'
             })
@@ -124,7 +156,11 @@ class ClienteUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Cliente
         fields = [
+<<<<<<< HEAD
             'nome', 'telefone', 'endereco', 'ponto_referencia',
+=======
+            'nome', 'telefone', 'endereco',
+>>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
             'cidade', 'estado', 'cep'
         ]
     
@@ -158,12 +194,19 @@ class ClienteDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Cliente
         fields = [
+<<<<<<< HEAD
             'id', 'usuario', 'cpf', 'endereco', 'ponto_referencia', 'cidade',
+=======
+            'id', 'usuario', 'cpf', 'endereco', 'cidade',
+>>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
             'estado', 'cep', 'pets', 'total_agendamentos',
             'ativo', 'data_criacao', 'data_atualizacao'
         ]
     
+<<<<<<< HEAD
     @extend_schema_field(serializers.ListField(child=serializers.DictField()))
+=======
+>>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
     def get_pets(self, obj):
         """
         Retornar lista resumida de pets.

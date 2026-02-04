@@ -7,6 +7,10 @@ from apps.authentication.serializers import (
     UsuarioCreateSerializer,
     UsuarioSerializer,
     AlterarSenhaSerializer,
+<<<<<<< HEAD
+=======
+    GoogleLoginSerializer,
+>>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
     UploadFotoSerializer
 )
 
@@ -46,3 +50,18 @@ registro = extend_schema(
     }
 )
 
+<<<<<<< HEAD
+=======
+# Login Social
+google_login = extend_schema(
+    tags=[TAG],
+    summary="Login com Google",
+    description="Autentica ou cria usuário via Google OAuth (Frame 429).",
+    request=GoogleLoginSerializer,
+    responses={
+        200: envelop(CustomTokenObtainPairSerializer),
+        400: {"description": "Dados inválidos ou token inválido"}
+    }
+)
+
+>>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)

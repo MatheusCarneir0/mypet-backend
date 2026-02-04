@@ -10,7 +10,10 @@ from .serializers import (
     ServicoListSerializer,
     ServicoCreateUpdateSerializer
 )
+<<<<<<< HEAD
 from apps.core.permissions import IsAdministrador
+=======
+>>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
 from apps.swagger.servicos import servico_view_schema
 
 
@@ -18,6 +21,7 @@ from apps.swagger.servicos import servico_view_schema
 class ServicoViewSet(viewsets.ModelViewSet):
     """
     ViewSet para operações de Serviço.
+<<<<<<< HEAD
     - list/retrieve: qualquer usuário autenticado
     - create/update/delete: apenas administrador
     """
@@ -27,6 +31,11 @@ class ServicoViewSet(viewsets.ModelViewSet):
         if self.action in ['list', 'retrieve']:
             return [IsAuthenticated()]
         return [IsAuthenticated(), IsAdministrador()]
+=======
+    """
+    queryset = Servico.objects.filter(ativo=True)
+    permission_classes = [IsAuthenticated]
+>>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
     
     def get_serializer_class(self):
         if self.action == 'list':

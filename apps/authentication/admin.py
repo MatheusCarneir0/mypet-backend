@@ -1,13 +1,17 @@
 # apps/authentication/admin.py
+<<<<<<< HEAD
 """
 Configuração do Django Admin para o modelo Usuario.
 Refatorado para usar Django Groups ao invés de tipo_usuario.
 """
+=======
+>>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from .models import Usuario
 
 
+<<<<<<< HEAD
 def get_grupos(obj):
     """Retorna grupos do usuário como string."""
     return ", ".join(obj.get_grupos())
@@ -44,3 +48,20 @@ class UsuarioAdmin(BaseUserAdmin):
     
     readonly_fields = ['data_criacao', 'data_atualizacao']
     filter_horizontal = ('groups', 'user_permissions')
+=======
+@admin.register(Usuario)
+class UsuarioAdmin(BaseUserAdmin):
+    list_display = ['email', 'nome', 'tipo_usuario', 'ativo', 'is_staff', 'data_criacao']
+    list_filter = ['tipo_usuario', 'ativo', 'is_staff', 'data_criacao']
+    search_fields = ['email', 'nome', 'telefone']
+    ordering = ['-data_criacao']
+    
+    fieldsets = BaseUserAdmin.fieldsets + (
+        ('Informações Extras', {'fields': ('tipo_usuario', 'telefone', 'ativo')}),
+    )
+    
+    add_fieldsets = BaseUserAdmin.add_fieldsets + (
+        ('Informações Extras', {'fields': ('tipo_usuario', 'telefone')}),
+    )
+
+>>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)

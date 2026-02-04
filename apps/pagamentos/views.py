@@ -2,13 +2,19 @@
 """
 Views para gerenciamento de pagamentos.
 """
+<<<<<<< HEAD
 import logging
+=======
+>>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
 from rest_framework import viewsets, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
+<<<<<<< HEAD
 
 logger = logging.getLogger(__name__)
+=======
+>>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
 from .models import FormaPagamento, TransacaoPagamento
 from .serializers import (
     FormaPagamentoSerializer,
@@ -20,7 +26,10 @@ from .serializers import (
 )
 from .services import PagamentoService
 from apps.agendamentos.models import Agendamento
+<<<<<<< HEAD
 from apps.core.permissions import IsFuncionario
+=======
+>>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
 from apps.swagger.pagamentos import (
     forma_pagamento_view_schema,
     transacao_pagamento_view_schema
@@ -38,19 +47,29 @@ class FormaPagamentoViewSet(viewsets.ReadOnlyModelViewSet):
 
 
 @transacao_pagamento_view_schema
+<<<<<<< HEAD
 class TransacaoPagamentoViewSet(viewsets.ReadOnlyModelViewSet):
     """
     ViewSet para transações de pagamento.
     SEGURANÇA: Transações são IMUTÁVEIS - apenas leitura via GET.
     Edição/deleção bloqueada para compliance e auditoria.
+=======
+class TransacaoPagamentoViewSet(viewsets.ModelViewSet):
+    """
+    ViewSet para transações de pagamento.
+>>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
     """
     queryset = TransacaoPagamento.objects.all().select_related(
         'agendamento', 'forma_pagamento'
     )
     serializer_class = TransacaoPagamentoSerializer
+<<<<<<< HEAD
     permission_classes = [IsFuncionario]
     # Bloquear PUT, PATCH e DELETE - apenas GET e POST (actions) permitidos
     http_method_names = ['get', 'post', 'head', 'options']
+=======
+    permission_classes = [IsAuthenticated]
+>>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
     
     @action(detail=False, methods=['post'], url_path='processar-dinheiro')
     def processar_dinheiro(self, request):
@@ -75,6 +94,7 @@ class TransacaoPagamentoViewSet(viewsets.ReadOnlyModelViewSet):
                 TransacaoPagamentoSerializer(transacao).data,
                 status=status.HTTP_201_CREATED
             )
+<<<<<<< HEAD
         except Agendamento.DoesNotExist:
             return Response({
                 'error': 'Agendamento não encontrado.'
@@ -84,6 +104,12 @@ class TransacaoPagamentoViewSet(viewsets.ReadOnlyModelViewSet):
             return Response({
                 'error': 'Erro interno ao processar pagamento. Tente novamente.'
             }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+=======
+        except Exception as e:
+            return Response({
+                'error': str(e)
+            }, status=status.HTTP_400_BAD_REQUEST)
+>>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
     
     @action(detail=False, methods=['post'], url_path='processar-cartao')
     def processar_cartao(self, request):
@@ -111,6 +137,7 @@ class TransacaoPagamentoViewSet(viewsets.ReadOnlyModelViewSet):
                 TransacaoPagamentoSerializer(transacao).data,
                 status=status.HTTP_201_CREATED
             )
+<<<<<<< HEAD
         except Agendamento.DoesNotExist:
             return Response({
                 'error': 'Agendamento não encontrado.'
@@ -120,6 +147,12 @@ class TransacaoPagamentoViewSet(viewsets.ReadOnlyModelViewSet):
             return Response({
                 'error': 'Erro interno ao processar pagamento. Tente novamente.'
             }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+=======
+        except Exception as e:
+            return Response({
+                'error': str(e)
+            }, status=status.HTTP_400_BAD_REQUEST)
+>>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
     
     @action(detail=False, methods=['post'], url_path='gerar-pix')
     def gerar_pix(self, request):
@@ -143,6 +176,7 @@ class TransacaoPagamentoViewSet(viewsets.ReadOnlyModelViewSet):
                 TransacaoPagamentoSerializer(transacao).data,
                 status=status.HTTP_201_CREATED
             )
+<<<<<<< HEAD
         except Agendamento.DoesNotExist:
             return Response({
                 'error': 'Agendamento não encontrado.'
@@ -152,6 +186,12 @@ class TransacaoPagamentoViewSet(viewsets.ReadOnlyModelViewSet):
             return Response({
                 'error': 'Erro interno ao processar pagamento. Tente novamente.'
             }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+=======
+        except Exception as e:
+            return Response({
+                'error': str(e)
+            }, status=status.HTTP_400_BAD_REQUEST)
+>>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
     
     @action(detail=False, methods=['post'], url_path='confirmar-pix')
     def confirmar_pix(self, request):
@@ -170,8 +210,15 @@ class TransacaoPagamentoViewSet(viewsets.ReadOnlyModelViewSet):
             return Response(
                 TransacaoPagamentoSerializer(transacao).data
             )
+<<<<<<< HEAD
         except Exception:
             logger.exception('Erro ao confirmar pagamento PIX')
             return Response({
                 'error': 'Erro interno ao confirmar pagamento. Tente novamente.'
             }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+=======
+        except Exception as e:
+            return Response({
+                'error': str(e)
+            }, status=status.HTTP_400_BAD_REQUEST)
+>>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)

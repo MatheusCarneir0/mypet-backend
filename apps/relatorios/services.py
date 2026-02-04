@@ -8,11 +8,14 @@ from datetime import timedelta
 from .models import Relatorio
 
 
+<<<<<<< HEAD
 def _get_total_pets() -> int:
     """Helper para evitar import circular ao contar pets."""
     from apps.pets.models import Pet
     return Pet.objects.filter(ativo=True).count()
 
+=======
+>>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
 class RelatorioService:
     """
     Service para geração de relatórios gerenciais.
@@ -90,8 +93,11 @@ class RelatorioService:
             'agendamentos_hoje': agendamentos_mes.filter(
                 data_hora__date=hoje
             ).count(),
+<<<<<<< HEAD
             # #4: adicionado para evitar que o frontend faça requests extras
             'total_clientes': Cliente.objects.filter(ativo=True).count(),
             'total_pets': _get_total_pets(),
+=======
+>>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
         }
 

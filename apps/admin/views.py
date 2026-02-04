@@ -2,13 +2,19 @@
 """
 Views administrativas para dashboard e relatórios.
 """
+<<<<<<< HEAD
 import logging
+=======
+>>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
 from rest_framework import status, viewsets
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
+<<<<<<< HEAD
 
 logger = logging.getLogger(__name__)
+=======
+>>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
 from apps.core.permissions import IsAdministrador
 from apps.relatorios.services import RelatorioService
 from apps.relatorios.serializers import RelatorioSerializer, RelatorioCreateSerializer
@@ -36,11 +42,18 @@ class DashboardView(APIView):
         try:
             data = RelatorioService.obter_dashboard_data()
             return Response(data, status=status.HTTP_200_OK)
+<<<<<<< HEAD
         except Exception:
             logger.exception('Erro ao obter dados do dashboard')
             return Response({
                 'error': 'Erro interno ao carregar dashboard. Tente novamente.'
             }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+=======
+        except Exception as e:
+            return Response({
+                'error': str(e)
+            }, status=status.HTTP_400_BAD_REQUEST)
+>>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
 
 
 @gerar_relatorio
@@ -69,11 +82,18 @@ class RelatorioGerarView(APIView):
                 RelatorioSerializer(relatorio).data,
                 status=status.HTTP_201_CREATED
             )
+<<<<<<< HEAD
         except Exception:
             logger.exception('Erro ao gerar relatório')
             return Response({
                 'error': 'Erro interno ao gerar relatório. Tente novamente.'
             }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+=======
+        except Exception as e:
+            return Response({
+                'error': str(e)
+            }, status=status.HTTP_400_BAD_REQUEST)
+>>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
 
 
 @admin_forma_pagamento_view_schema

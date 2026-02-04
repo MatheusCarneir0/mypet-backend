@@ -19,7 +19,11 @@ class ServicoSerializer(serializers.ModelSerializer):
         model = Servico
         fields = [
             'id', 'tipo', 'tipo_display', 'descricao',
+<<<<<<< HEAD
             'preco', 'duracao_minutos', 'duracao_medio_grande', 'ativo',
+=======
+            'preco', 'duracao_minutos', 'ativo',
+>>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
             'data_criacao', 'data_atualizacao'
         ]
         read_only_fields = ['id', 'data_criacao', 'data_atualizacao']
@@ -37,7 +41,11 @@ class ServicoListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Servico
         fields = [
+<<<<<<< HEAD
             'id', 'tipo', 'tipo_display', 'descricao', 'preco', 'duracao_minutos', 'duracao_medio_grande'
+=======
+            'id', 'tipo', 'tipo_display', 'preco', 'duracao_minutos'
+>>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
         ]
 
 
@@ -48,9 +56,14 @@ class ServicoCreateUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Servico
         fields = [
+<<<<<<< HEAD
             'id', 'tipo', 'descricao', 'preco', 'duracao_minutos', 'duracao_medio_grande'
         ]
         read_only_fields = ['id']
+=======
+            'tipo', 'descricao', 'preco', 'duracao_minutos'
+        ]
+>>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
     
     def validate_preco(self, value):
         if value < 0:

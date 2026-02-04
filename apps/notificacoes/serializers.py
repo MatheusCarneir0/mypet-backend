@@ -23,6 +23,7 @@ class NotificacaoSerializer(serializers.ModelSerializer):
         model = Notificacao
         fields = [
             'id', 'agendamento', 'tipo', 'tipo_display',
+<<<<<<< HEAD
             'canal', 'canal_display',
             'assunto', 'mensagem', 'enviada', 'data_envio',
             'data_criacao'
@@ -47,6 +48,8 @@ class NotificacaoAdminSerializer(serializers.ModelSerializer):
         model = Notificacao
         fields = [
             'id', 'agendamento', 'tipo', 'tipo_display',
+=======
+>>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
             'canal', 'canal_display', 'destinatario',
             'assunto', 'mensagem', 'enviada', 'data_envio',
             'tentativas', 'erro', 'data_criacao'
@@ -66,6 +69,10 @@ class NotificacaoListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Notificacao
         fields = [
+<<<<<<< HEAD
             'id', 'tipo_display',
+=======
+            'id', 'tipo_display', 'destinatario',
+>>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
             'enviada', 'data_envio', 'data_criacao'
         ]

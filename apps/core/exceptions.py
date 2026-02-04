@@ -14,6 +14,7 @@ def custom_exception_handler(exc, context):
     response = exception_handler(exc, context)
     
     if response is not None:
+<<<<<<< HEAD
         data = response.data
         if isinstance(data, dict):
             message = data.get('detail', 'Erro na requisição')
@@ -25,6 +26,12 @@ def custom_exception_handler(exc, context):
             'error': True,
             'message': str(message),
             'data': data
+=======
+        custom_response_data = {
+            'error': True,
+            'message': response.data.get('detail', 'Erro na requisição'),
+            'data': response.data
+>>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
         }
         response.data = custom_response_data
     

@@ -36,7 +36,11 @@ class Funcionario(BaseModel):
         max_length=100,
         help_text='Ex: Segunda a Sexta, 08:00-17:00'
     )
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
     class Meta:
         db_table = 'funcionarios'
         verbose_name = _('Funcionário')
@@ -48,12 +52,17 @@ class Funcionario(BaseModel):
     
     def __str__(self):
         return f'{self.usuario.nome} - {self.get_cargo_display()}'
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
     @property
     def total_atendimentos(self):
         """Retorna o número total de atendimentos realizados."""
         return self.agendamentos.filter(status='CONCLUIDO').count()
 
+<<<<<<< HEAD
     @staticmethod
     def _parse_horario_trabalho_string(horario_str):
         """
@@ -254,3 +263,5 @@ class HorarioTrabalho(BaseModel):
         return f'{self.funcionario.usuario.nome} - {self.get_dia_semana_display()} ({self.hora_inicio.strftime("%H:%M")} às {self.hora_fim.strftime("%H:%M")})'
 
 
+=======
+>>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)

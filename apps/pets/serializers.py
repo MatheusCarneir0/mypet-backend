@@ -3,10 +3,7 @@
 Serializers para o app de pets.
 """
 from rest_framework import serializers
-<<<<<<< HEAD
 from drf_spectacular.utils import extend_schema_field
-=======
->>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
 from .models import Pet
 from apps.clientes.models import Cliente
 
@@ -27,10 +24,7 @@ class PetSerializer(serializers.ModelSerializer):
         source='get_especie_display',
         read_only=True
     )
-<<<<<<< HEAD
     total_atendimentos = serializers.IntegerField(read_only=True)
-=======
->>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
     
     class Meta:
         model = Pet
@@ -66,13 +60,8 @@ class PetListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Pet
         fields = [
-<<<<<<< HEAD
-            'id', 'cliente', 'nome', 'nome_cliente', 'especie_display',
-            'raca', 'idade', 'peso', 'porte_display', 'foto'
-=======
             'id', 'nome', 'nome_cliente', 'especie_display',
             'raca', 'idade', 'porte_display', 'foto'
->>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
         ]
 
 
@@ -83,19 +72,9 @@ class PetCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Pet
         fields = [
-<<<<<<< HEAD
-            'id', 'cliente', 'nome', 'especie', 'raca',
-            'idade', 'peso', 'foto', 'observacoes'
-        ]
-        read_only_fields = ['id']
-        extra_kwargs = {
-            'cliente': {'required': False},
-        }
-=======
             'cliente', 'nome', 'especie', 'raca',
             'idade', 'peso', 'foto', 'observacoes'
         ]
->>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
     
     def validate_cliente(self, value):
         """
@@ -107,23 +86,6 @@ class PetCreateSerializer(serializers.ModelSerializer):
             )
         return value
     
-<<<<<<< HEAD
-    def validate(self, data):
-        """
-        Se o usuário é cliente, ignora qualquer cliente_id enviado
-        (será forçado no perform_create da view).
-        """
-        request = self.context.get('request')
-        if request and request.user.is_cliente:
-            data.pop('cliente', None)
-        elif 'cliente' not in data:
-            raise serializers.ValidationError(
-                {'cliente': 'Este campo é obrigatório para funcionários/admin.'}
-            )
-        return data
-    
-=======
->>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
     def validate_peso(self, value):
         """
         Validar peso do pet.
@@ -171,10 +133,7 @@ class PetDetailSerializer(serializers.ModelSerializer):
             'total_atendimentos', 'ativo', 'data_criacao'
         ]
     
-<<<<<<< HEAD
     @extend_schema_field(dict)
-=======
->>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
     def get_cliente(self, obj):
         """
         Retornar dados resumidos do cliente.
@@ -186,10 +145,7 @@ class PetDetailSerializer(serializers.ModelSerializer):
             'telefone': obj.cliente.usuario.telefone,
         }
     
-<<<<<<< HEAD
     @extend_schema_field(serializers.ListField(child=serializers.DictField()))
-=======
->>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
     def get_historico_recente(self, obj):
         """
         Retornar últimos 5 atendimentos.

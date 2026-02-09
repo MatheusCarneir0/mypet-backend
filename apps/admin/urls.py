@@ -21,7 +21,7 @@ router = DefaultRouter()
 from apps.funcionarios.views import FuncionarioViewSet
 from .views import AdminFormaPagamentoViewSet
 
-app_name = 'admin'
+app_name = 'backoffice'
 
 # Router para ViewSets
 router = DefaultRouter()

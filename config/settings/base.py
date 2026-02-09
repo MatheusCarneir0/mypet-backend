@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-    
-    # Third-party apps
-=======
 # config/settings/base.py
 """
 Django settings for MyPet project.
@@ -34,7 +30,6 @@ DJANGO_APPS = [
 ]
 
 THIRD_PARTY_APPS = [
->>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
     'rest_framework',
     'rest_framework_simplejwt',
     'corsheaders',
@@ -49,34 +44,6 @@ LOCAL_APPS = [
     'apps.me',
     'apps.clientes',
     'apps.pets',
-<<<<<<< HEAD
-    'apps.services',
-    'apps.appointments',
-    'apps.payments',
-    'apps.notifications',
-    'core',
-]
-=======
-]
-
-THIRD_PARTY_APPS = [
-    'rest_framework',
-    'rest_framework_simplejwt',
-    'rest_framework_simplejwt.token_blacklist',
-    'corsheaders',
-    'django_filters',
-    'drf_spectacular',
-    'django_celery_beat',
-]
-
-LOCAL_APPS = [
-    'apps.core',
-    'apps.authentication',
-    'apps.me',
-    'apps.clientes',
-    'apps.pets',
-=======
->>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
     'apps.agendamentos',
     'apps.servicos',
     'apps.funcionarios',
@@ -90,10 +57,6 @@ INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-<<<<<<< HEAD
-    'whitenoise.middleware.WhiteNoiseMiddleware',
-=======
->>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
     'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -163,18 +126,10 @@ TIME_ZONE = 'America/Fortaleza'
 USE_I18N = True
 USE_TZ = True
 
-<<<<<<< HEAD
-
-# Static files (CSS, JavaScript, Images)
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-=======
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_DIRS = [BASE_DIR / 'static']
->>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
 
 # Media files
 MEDIA_URL = '/media/'
@@ -200,20 +155,6 @@ REST_FRAMEWORK = {
     ],
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
     'EXCEPTION_HANDLER': 'apps.core.exceptions.custom_exception_handler',
-<<<<<<< HEAD
-    # Rate Limiting — proteção contra brute-force e DoS
-    'DEFAULT_THROTTLE_CLASSES': [
-        'rest_framework.throttling.AnonRateThrottle',
-        'rest_framework.throttling.UserRateThrottle',
-    ],
-    'DEFAULT_THROTTLE_RATES': {
-        'anon': config('THROTTLE_ANON_RATE', default='100/hour'),
-        'user': config('THROTTLE_USER_RATE', default='1000/hour'),
-        'login': config('THROTTLE_LOGIN_RATE', default='5/minute'),
-        'register': config('THROTTLE_REGISTER_RATE', default='10/hour'),
-    }
-=======
->>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
 }
 
 # JWT Settings
@@ -234,27 +175,11 @@ SIMPLE_JWT = {
 }
 
 # CORS Settings
-<<<<<<< HEAD
-_cors_env = config('CORS_ORIGINS', default='')
-if _cors_env:
-    CORS_ALLOWED_ORIGINS = [o.strip() for o in _cors_env.split(',') if o.strip()]
-    CORS_ALLOW_ALL_ORIGINS = False
-else:
-    CORS_ALLOWED_ORIGINS = [
-        "http://localhost:3000",
-        "http://localhost:3001",
-        "http://localhost:5173",
-        "http://127.0.0.1:3000",
-        "http://127.0.0.1:5173",
-    ]
-    CORS_ALLOW_ALL_ORIGINS = False
-=======
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://localhost:3001",
     "http://127.0.0.1:3000",
 ]
->>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
 CORS_ALLOW_CREDENTIALS = True
 
 # Cache (Redis)
@@ -291,11 +216,7 @@ DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL', default='noreply@farmavet.com.
 
 # PIX Configuration
 PIX_CHAVE = config('PIX_CHAVE', default='suachave@email.com')
-<<<<<<< HEAD
-PIX_MERCHANT_NAME = config('PIX_MERCHANT_NAME', default='FarmaVet')
-=======
 PIX_MERCHANT_NAME = config('PIX_MERCHANT_NAME', default='FarmaVet Pet Shop')
->>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
 PIX_MERCHANT_CITY = config('PIX_MERCHANT_CITY', default='Boa Viagem')
 
 # Backup Configuration
@@ -314,11 +235,6 @@ LOGGING = {
             'format': '{levelname} {asctime} {module} {message}',
             'style': '{',
         },
-<<<<<<< HEAD
-        'auditoria': {
-            'format': '[AUDITORIA] {asctime} | {message}',
-            'style': '{',
-        },
     },
     'handlers': {
         'console': {
@@ -326,40 +242,18 @@ LOGGING = {
             'class': 'logging.StreamHandler',
             'formatter': 'verbose',
         },
-=======
-    },
-    'handlers': {
->>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
         'file': {
             'level': 'INFO',
             'class': 'logging.FileHandler',
             'filename': BASE_DIR / 'logs' / 'django.log',
             'formatter': 'verbose',
-<<<<<<< HEAD
-            'delay': True,
-        },
-        # Handler exclusivo de auditoria (compliance / LGPD)
-        'file_auditoria': {
-            'level': 'INFO',
-            'class': 'logging.FileHandler',
-            'filename': BASE_DIR / 'logs' / 'auditoria.log',
-            'formatter': 'auditoria',
-            'delay': True,
+            # Add delay=True to prevent file creation until write, 
+            # which helps if directory doesn't exist yet/permissions issue
+            'delay': True, 
         },
     },
     'root': {
-        'handlers': ['console'],
-=======
-        },
-        'console': {
-            'level': 'INFO',
-            'class': 'logging.StreamHandler',
-            'formatter': 'verbose',
-        },
-    },
-    'root': {
-        'handlers': ['console', 'file'],
->>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
+        'handlers': ['console'], # Default to console
         'level': 'INFO',
     },
     'loggers': {
@@ -368,30 +262,22 @@ LOGGING = {
             'level': 'INFO',
             'propagate': False,
         },
-<<<<<<< HEAD
         'django.db.backends': {
             'handlers': ['console'],
             'level': 'ERROR',
             'propagate': False,
         },
-        # Logger de auditoria de ações sensíveis do sistema (agendamentos, auth, etc.)
-        'auditoria': {
-            'handlers': ['console', 'file_auditoria'],
-            'level': 'INFO',
-            'propagate': False,
-        },
     },
 }
 
-# Security Headers (base — produção adiciona HSTS)
-SECURE_CONTENT_TYPE_NOSNIFF = True
-X_FRAME_OPTIONS = 'DENY'
-SECURE_BROWSER_XSS_FILTER = True
+# Debug print to verify settings loading
+print(f"Loading settings... DB_HOST={DATABASES['default']['HOST']}")
+
 
 # Spectacular Settings (API Docs)
 SPECTACULAR_SETTINGS = {
-    'TITLE': 'FarmaVet API',
-    'DESCRIPTION': 'Sistema de Gerenciamento FarmaVet para pet shop e clinica veterinaria',
+    'TITLE': 'MyPet API',
+    'DESCRIPTION': 'Sistema de Gerenciamento para Pet Shop FarmaVet',
     'VERSION': '1.0.0',
     'SERVE_INCLUDE_SCHEMA': False,
     'ENUM_NAME_OVERRIDES': {
@@ -402,17 +288,3 @@ SPECTACULAR_SETTINGS = {
     }
 }
 
->>>>>>> f9a2bae6002ef127bbe409eb0d6089f2507abfff
-=======
-    },
-}
-
-# Spectacular Settings (API Docs)
-SPECTACULAR_SETTINGS = {
-    'TITLE': 'MyPet API',
-    'DESCRIPTION': 'Sistema de Gerenciamento para Pet Shop FarmaVet',
-    'VERSION': '1.0.0',
-    'SERVE_INCLUDE_SCHEMA': False,
-}
-
->>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)

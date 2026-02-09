@@ -20,11 +20,10 @@ def create_user_groups(sender, **kwargs):
     - CLIENTE: Usuários clientes do pet shop
     - FUNCIONARIO: Funcionários (atendentes, tosadores, veterinários)
     - ADMINISTRADOR: Administradores do sistema
-    - SUPER_USUARIO: Perfil administrativo avançado
     """
     # Só executa para o app authentication
     if sender.name == 'apps.authentication':
-        grupos = ['CLIENTE', 'FUNCIONARIO', 'ADMINISTRADOR', 'SUPER_USUARIO']
+        grupos = ['CLIENTE', 'FUNCIONARIO', 'ADMINISTRADOR']
         
         for nome_grupo in grupos:
             grupo, created = Group.objects.get_or_create(name=nome_grupo)

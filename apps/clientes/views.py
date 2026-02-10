@@ -25,13 +25,10 @@ from apps.swagger.clientes import cliente_view_schema
 class ClienteViewSet(viewsets.ModelViewSet):
     """
     ViewSet para operações de Cliente.
-<<<<<<< HEAD
     IMPORTANTE: 
     - Cadastro via /auth/register/ (não POST /clientes/)
     - Atualização via /me/profile/ (não PUT/PATCH /clientes/{id}/)
     - Apenas GET e DELETE permitidos aqui (admin/funcionário)
-=======
->>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
     """
     queryset = Cliente.objects.filter(ativo=True).select_related('usuario')
     permission_classes = [IsAuthenticated]
@@ -39,10 +36,8 @@ class ClienteViewSet(viewsets.ModelViewSet):
     search_fields = ['usuario__nome', 'usuario__email', 'cpf', 'cidade']
     ordering_fields = ['usuario__nome', 'data_criacao']
     ordering = ['-data_criacao']
-<<<<<<< HEAD
-    http_method_names = ['get', 'post', 'patch', 'delete', 'head', 'options']
-=======
->>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
+    # Bloquear POST, PUT e PATCH - apenas GET e DELETE permitidos
+    http_method_names = ['get', 'delete', 'head', 'options']
     
     def get_serializer_class(self):
         if self.action == 'list':
@@ -65,19 +60,10 @@ class ClienteViewSet(viewsets.ModelViewSet):
         - destroy: Apenas Admin
         """
         if self.action == 'list':
-<<<<<<< HEAD
-            # IsFuncionario já inclui Administrador (ver permissions.py:28)
-            from apps.core.permissions import IsFuncionario
-            return [IsFuncionario()]
-        elif self.action == 'create':
-            from apps.core.permissions import IsFuncionario
-            return [IsFuncionario()]  # Apenas funcionário/admin pode criar cliente
-=======
             from apps.core.permissions import IsFuncionario
             return [IsFuncionario()]  # Apenas Funcionário/Admin pode listar todos (RF12)
         elif self.action == 'create':
             return [AllowAny()]  # Público - qualquer um pode se cadastrar
->>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
         elif self.action == 'destroy':
             from apps.core.permissions import IsAdministrador
             return [IsAdministrador()]  # Apenas Admin pode deletar
@@ -103,20 +89,4 @@ class ClienteViewSet(viewsets.ModelViewSet):
         # Funcionário e Administrador vêem todos
         return queryset
     
-<<<<<<< HEAD
 
-=======
-    @action(detail=False, methods=['get'], url_path='me')
-    def me(self, request):
-        """
-        Retorna dados do cliente autenticado.
-        """
-        try:
-            cliente = ClienteService.obter_cliente_por_usuario(request.user)
-            serializer = ClienteDetailSerializer(cliente)
-            return Response(serializer.data)
-        except Exception as e:
-            return Response({
-                'error': str(e)
-            }, status=status.HTTP_404_NOT_FOUND)
->>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)

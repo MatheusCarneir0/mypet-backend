@@ -5,11 +5,6 @@ from apps.swagger.swagger_helper import envelop
 from apps.clientes.serializers import (
     ClienteDetailSerializer,
     ClienteListSerializer,
-<<<<<<< HEAD
-=======
-    ClienteCreateSerializer,
-    ClienteUpdateSerializer
->>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
 )
 
 TAG = "Clientes"
@@ -38,7 +33,6 @@ retrieve_cliente = extend_schema(
     }
 )
 
-<<<<<<< HEAD
 
 # Deleção (Soft Delete)
 destroy_cliente = extend_schema(
@@ -48,35 +42,10 @@ destroy_cliente = extend_schema(
     responses={
         204: {"description": "Cliente deletado com sucesso"},
         403: {"description": "Sem permissão para deletar"},
-=======
-# Criação
-create_cliente = extend_schema(
-    tags=[TAG],
-    summary="Auto-cadastro de cliente",
-    description="Cria um novo cliente no sistema. Endpoint público - qualquer um pode se cadastrar.",
-    request=ClienteCreateSerializer,
-    responses={
-        201: envelop(ClienteDetailSerializer),
-        400: {"description": "Dados inválidos"}
-    }
-)
-
-# Atualização
-update_cliente = extend_schema(
-    tags=[TAG],
-    summary="Atualizar cliente",
-    description="Atualiza os dados de um cliente existente. Apenas o próprio cliente ou administrador pode atualizar.",
-    request=ClienteUpdateSerializer,
-    responses={
-        200: envelop(ClienteDetailSerializer),
-        400: {"description": "Dados inválidos"},
-        403: {"description": "Sem permissão para atualizar"},
->>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
         404: {"description": "Cliente não encontrado"}
     }
 )
 
-<<<<<<< HEAD
 # Schema view para aplicar todos os decorators de uma vez
 # IMPORTANTE: Apenas list, retrieve e destroy estão habilitados
 # create, update e partial_update foram BLOQUEADOS (ver http_method_names)
@@ -84,39 +53,5 @@ cliente_view_schema = extend_schema_view(
     list=list_clientes,
     retrieve=retrieve_cliente,
     destroy=destroy_cliente,
-=======
-partial_update_cliente = extend_schema(
-    tags=[TAG],
-    summary="Atualizar parcialmente um cliente",
-    description="Atualiza parcialmente os dados de um cliente existente.",
-    request=ClienteUpdateSerializer,
-    responses={
-        200: envelop(ClienteDetailSerializer),
-        400: {"description": "Dados inválidos"},
-        403: {"description": "Sem permissão para atualizar"},
-        404: {"description": "Cliente não encontrado"}
-    }
-)
-
-# Ações customizadas
-me_cliente = extend_schema(
-    tags=[TAG],
-    summary="Obter dados do cliente autenticado",
-    description="Retorna os dados do cliente associado ao usuário autenticado.",
-    responses={
-        200: envelop(ClienteDetailSerializer),
-        404: {"description": "Cliente não encontrado para este usuário"}
-    }
-)
-
-# Schema view para aplicar todos os decorators de uma vez
-cliente_view_schema = extend_schema_view(
-    list=list_clientes,
-    retrieve=retrieve_cliente,
-    create=create_cliente,
-    update=update_cliente,
-    partial_update=partial_update_cliente,
-    me=me_cliente,
->>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
 )
 

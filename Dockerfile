@@ -1,11 +1,16 @@
 
-# Instalar dependências do sistema
+
+# Instalar dependências do sistema necessárias para pillow
+RUN apt-get update && apt-get install -y \
+    libjpeg-dev \
+    zlib1g-dev \
+    build-essential \
+    && rm -rf /var/lib/apt/lists/*
 
 # Definir diretório de trabalho
 WORKDIR /app
 
 # Instalar dependências Python
->>>>>>> f9a2bae6002ef127bbe409eb0d6089f2507abfff
 COPY requirements.txt /app/
 RUN pip install --upgrade pip && \
     pip install -r requirements.txt

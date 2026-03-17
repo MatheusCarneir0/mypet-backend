@@ -72,7 +72,6 @@ class BaseModel(TimeStampedModel, SoftDeleteModel):
     class Meta:
         abstract = True
 
-<<<<<<< HEAD
 
 class HorarioTrabalho(models.Model):
     dia_semana = models.IntegerField(choices=[
@@ -92,5 +91,3 @@ class HorarioTrabalho(models.Model):
     def __str__(self):
         return f"{self.get_dia_semana_display()}: {self.inicio_manha}-{self.fim_manha}, {self.inicio_tarde}-{self.fim_tarde}"
 
-=======
->>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)

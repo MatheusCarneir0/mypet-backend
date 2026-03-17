@@ -2,16 +2,11 @@
 """
 Views para geração e listagem de relatórios.
 """
-<<<<<<< HEAD
 import logging
 from rest_framework import viewsets, status
 from rest_framework.decorators import action
 
 logger = logging.getLogger(__name__)
-=======
-from rest_framework import viewsets, status
-from rest_framework.decorators import action
->>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from django.http import FileResponse
@@ -30,10 +25,7 @@ class RelatorioViewSet(viewsets.ModelViewSet):
     queryset = Relatorio.objects.all().select_related('administrador')
     serializer_class = RelatorioSerializer
     permission_classes = [IsAuthenticated, IsAdministrador]
-<<<<<<< HEAD
     http_method_names = ['get', 'post', 'head', 'options']
-=======
->>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
     
     def get_serializer_class(self):
         if self.action == 'create':
@@ -59,18 +51,11 @@ class RelatorioViewSet(viewsets.ModelViewSet):
                 RelatorioSerializer(relatorio).data,
                 status=status.HTTP_201_CREATED
             )
-<<<<<<< HEAD
         except Exception:
             logger.exception('Erro ao gerar relatório')
             return Response({
                 'error': 'Erro interno ao gerar relatório. Tente novamente.'
             }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-=======
-        except Exception as e:
-            return Response({
-                'error': str(e)
-            }, status=status.HTTP_400_BAD_REQUEST)
->>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
     
     @action(detail=True, methods=['get'], url_path='download')
     def download(self, request, pk=None):
@@ -98,15 +83,8 @@ class RelatorioViewSet(viewsets.ModelViewSet):
         try:
             data = RelatorioService.obter_dashboard_data()
             return Response(data)
-<<<<<<< HEAD
         except Exception:
             logger.exception('Erro ao obter dados do dashboard')
             return Response({
                 'error': 'Erro interno ao carregar dashboard. Tente novamente.'
             }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-=======
-        except Exception as e:
-            return Response({
-                'error': str(e)
-            }, status=status.HTTP_400_BAD_REQUEST)
->>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)

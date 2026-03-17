@@ -43,23 +43,16 @@ class IsCliente(BasePermission):
 
 class IsOwnerOrAdmin(BasePermission):
     """
-<<<<<<< HEAD
     Permissão para dono do recurso, funcionário ou administrador.
-=======
-    Permissão para dono do recurso ou administrador.
->>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
     """
     def has_object_permission(self, request, view, obj):
         # Administrador tem acesso total
         if request.user.is_administrador:
             return True
-<<<<<<< HEAD
 
         # Funcionário tem acesso total
         if request.user.is_funcionario:
             return True
-=======
->>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
         
         # Verificar se é o dono
         if hasattr(obj, 'usuario'):
@@ -91,7 +84,6 @@ class IsAdminOrSuperUser(BasePermission):
         
         return False
 
-<<<<<<< HEAD
 
 class IsOwnerOrFuncionario(BasePermission):
     """
@@ -128,5 +120,3 @@ class IsCargoMatchesService(BasePermission):
         allowed = self.CARGO_SERVICE_MAP.get(cargo, [])
         return obj.servico.tipo in allowed
 
-=======
->>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)

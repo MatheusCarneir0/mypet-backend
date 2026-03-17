@@ -1,17 +1,11 @@
 # apps/me/views.py
-<<<<<<< HEAD
 import logging
-=======
->>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
 from rest_framework import generics, status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
-<<<<<<< HEAD
 
 logger = logging.getLogger(__name__)
-=======
->>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
 from apps.authentication.models import Usuario
 from apps.authentication.serializers import (
     UsuarioSerializer,
@@ -52,7 +46,6 @@ class UploadFotoView(APIView):
         serializer = UploadFotoSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
-<<<<<<< HEAD
         foto = serializer.validated_data["foto"]
         
         # Validar tipo
@@ -66,11 +59,6 @@ class UploadFotoView(APIView):
         try:
             usuario = request.user
             usuario.foto = foto
-=======
-        try:
-            usuario = request.user
-            usuario.foto = serializer.validated_data["foto"]
->>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
             usuario.save()
 
             return Response(
@@ -81,17 +69,11 @@ class UploadFotoView(APIView):
                 status=status.HTTP_200_OK,
             )
 
-<<<<<<< HEAD
         except Exception:
             logger.exception('Erro ao fazer upload de foto')
             return Response(
                 {"error": "Erro interno ao atualizar foto. Tente novamente."},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR,
-=======
-        except Exception as e:
-            return Response(
-                {"error": str(e)}, status=status.HTTP_400_BAD_REQUEST
->>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
             )
 
 
@@ -118,16 +100,10 @@ class AlterarSenhaView(APIView):
                 status=status.HTTP_200_OK,
             )
 
-<<<<<<< HEAD
         except Exception:
             logger.exception('Erro ao alterar senha')
             return Response(
                 {"error": "Erro interno ao alterar senha. Tente novamente."},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR,
-=======
-        except Exception as e:
-            return Response(
-                {"error": str(e)}, status=status.HTTP_400_BAD_REQUEST
->>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
             )
 

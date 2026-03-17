@@ -4,14 +4,9 @@ Views para gerenciamento de pets.
 """
 from rest_framework import viewsets, status
 from rest_framework.decorators import action
-<<<<<<< HEAD
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, AllowAny
-=======
-from rest_framework.response import Response
-from rest_framework.permissions import IsAuthenticated
->>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter, OrderingFilter
 from .models import Pet
@@ -35,10 +30,7 @@ class PetViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
     search_fields = ['nome', 'raca', 'cliente__usuario__nome']
-<<<<<<< HEAD
     filterset_fields = ['cliente', 'especie']
-=======
->>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
     ordering_fields = ['nome', 'data_criacao']
     ordering = ['-data_criacao']
     
@@ -47,24 +39,16 @@ class PetViewSet(viewsets.ModelViewSet):
         Permissões:
         - list: Cliente vê apenas os seus (filtrado por get_queryset), Funcionário vê todos
         - retrieve: Autenticado (mas filtrado por get_queryset)
-<<<<<<< HEAD
         - create: Cliente autenticado ou Funcionário/Admin
         - update/partial_update: Apenas o dono do pet ou Funcionário/Admin
         - destroy: Apenas o dono do pet ou Funcionário/Admin
         """
         if self.action == 'choices':
             return [AllowAny()]
-=======
-        - create: Cliente autenticado
-        - update/partial_update: Apenas o dono do pet ou Funcionário/Admin
-        - destroy: Apenas o dono do pet ou Funcionário/Admin
-        """
->>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
         if self.action in ['update', 'partial_update', 'destroy']:
             return [IsOwnerOrAdmin()]  # Apenas dono ou Funcionário/Admin
         return [IsAuthenticated()]  # list, retrieve, create
     
-<<<<<<< HEAD
     def perform_create(self, serializer):
         """
         Força o cliente a ser o próprio usuário autenticado.
@@ -76,8 +60,6 @@ class PetViewSet(viewsets.ModelViewSet):
         else:
             serializer.save()
     
-=======
->>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
     def get_serializer_class(self):
         if self.action == 'list':
             return PetListSerializer
@@ -137,7 +119,6 @@ class PetViewSet(viewsets.ModelViewSet):
         from apps.historico.serializers import HistoricoAtendimentoListSerializer
         serializer = HistoricoAtendimentoListSerializer(historico, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
-<<<<<<< HEAD
 
     # Override authentication_classes for the choices action
     # (action-level permission_classes=[AllowAny] alone isn't sufficient
@@ -206,5 +187,3 @@ class PetViewSet(viewsets.ModelViewSet):
             {'message': 'Foto do pet atualizada com sucesso.', 'foto_url': foto_url},
             status=status.HTTP_200_OK,
         )
-=======
->>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)

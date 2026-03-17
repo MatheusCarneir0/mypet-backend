@@ -58,7 +58,40 @@ htmlcov/
 # Celery
 celerybeat-schedule
 celerybeat.pid
+=======
+
+# OS
+.DS_Store
+Thumbs.db
+>>>>>>> f9a2bae6002ef127bbe409eb0d6089f2507abfff
 
 # Docker
 .dockerignore
 
+<<<<<<< HEAD
+=======
+# Logs
+logs/
+*.log
+
+# Backups
+backups/
+*.sql
+*.sql.gz
+
+# Coverage
+htmlcov/
+.coverage
+.coverage.*
+coverage.xml
+*.cover
+
+# Pytest
+.pytest_cache/
+
+# MyPy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+>>>>>>> f9a2bae6002ef127bbe409eb0d6089f2507abfff

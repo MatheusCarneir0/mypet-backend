@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-    networks:
-      - mypet_network
-=======
 # ================================================
 # MYPET - Docker Compose (CORRIGIDO)
 # ================================================
@@ -30,28 +26,6 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
->>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
-
-  # ======================================
-  # Redis Cache & Session Store
-  # ======================================
-  redis:
-    image: redis:7-alpine
-    container_name: mypet_redis
-    restart: unless-stopped
-    ports:
-      - "6379:6379"
-<<<<<<< HEAD
-    volumes:
-      - redis_data:/data
-=======
-    networks:
-      - mypet_network
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-mypet_user} -d ${DB_NAME:-mypet_db}"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
 
   # ======================================
   # Redis Cache & Session Store
@@ -64,30 +38,12 @@ services:
       - "6379:6379"
     networks:
       - mypet_network
->>>>>>> f9a2bae6002ef127bbe409eb0d6089f2507abfff
-=======
-    networks:
-      - mypet_network
->>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
       interval: 10s
       timeout: 5s
       retries: 5
-<<<<<<< HEAD
-<<<<<<< HEAD
-    networks:
-      - mypet_network
 
-  backend:
-    build: .
-    container_name: mypet_backend
-    command: python manage.py runserver 0.0.0.0:8000
-=======
-
-=======
-
->>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
   # ======================================
   # Django Web Application
   # ======================================
@@ -100,10 +56,6 @@ services:
     command: >
       sh -c "python manage.py migrate &&
              python manage.py runserver 0.0.0.0:8000"
-<<<<<<< HEAD
->>>>>>> f9a2bae6002ef127bbe409eb0d6089f2507abfff
-=======
->>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
     volumes:
       - .:/app
       - static_volume:/app/staticfiles
@@ -112,105 +64,11 @@ services:
       - "8000:8000"
     env_file:
       - .env
-<<<<<<< HEAD
-<<<<<<< HEAD
-    environment:
-      - DJANGO_SETTINGS_MODULE=${DJANGO_SETTINGS_MODULE:-config.settings.development}
-=======
->>>>>>> f9a2bae6002ef127bbe409eb0d6089f2507abfff
-=======
->>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
     depends_on:
       db:
         condition: service_healthy
       redis:
         condition: service_healthy
-<<<<<<< HEAD
-<<<<<<< HEAD
-    healthcheck:
-      test: ["CMD", "python", "manage.py", "check", "--deploy"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-=======
->>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)
-    networks:
-      - mypet_network
-    healthcheck:
-      test: ["CMD-SHELL", "python -c \"import urllib.request; urllib.request.urlopen('http://localhost:8000/')\""]
-      interval: 30s
-      timeout: 5s
-      retries: 5
-
-  # ======================================
-  # Celery Worker
-  # ======================================
-  celery_worker:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: mypet_celery_worker
-    restart: unless-stopped
-    command: celery -A celery_app worker --loglevel=info
-    volumes:
-      - .:/app
-    env_file:
-      - .env
-    depends_on:
-      db:
-        condition: service_healthy
-      redis:
-        condition: service_healthy
-      web:
-        condition: service_healthy
-    networks:
-      - mypet_network
-
-  # ======================================
-  # Celery Beat (Scheduled Tasks)
-  # ======================================
-  celery_beat:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: mypet_celery_beat
-    restart: unless-stopped
-    command: celery -A celery_app beat --loglevel=info --scheduler django_celery_beat.schedulers:DatabaseScheduler
-    volumes:
-      - .:/app
-    env_file:
-      - .env
-    depends_on:
-      db:
-        condition: service_healthy
-      redis:
-        condition: service_healthy
-      web:
-        condition: service_healthy
-    networks:
-      - mypet_network # End of depends_on block modifications
-
-# ======================================
-# Volumes
-# ======================================
-volumes:
-  postgres_data:
-    name: mypet_postgres_data
-    external: true
-  static_volume:
-    name: mypet_static
-  media_volume:
-    name: mypet_media
-
-# ======================================
-# Networks
-# ======================================
-networks:
-  mypet_network:
-<<<<<<< HEAD
-    driver: bridge
-
-=======
     networks:
       - mypet_network
     healthcheck:
@@ -286,8 +144,3 @@ networks:
   mypet_network:
     name: mypet_network
     driver: bridge
->>>>>>> f9a2bae6002ef127bbe409eb0d6089f2507abfff
-=======
-    name: mypet_network
-    driver: bridge
->>>>>>> 48d5ddc (Tá funcionando algumas rotas, mas tem erro no login)

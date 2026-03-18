@@ -10,6 +10,7 @@ ENV PYTHONUNBUFFERED=1
 RUN apt-get update && apt-get install -y \
     postgresql-client \
     gcc \
+    g++ \
     python3-dev \
     libpq-dev \
     && rm -rf /var/lib/apt/lists/*
